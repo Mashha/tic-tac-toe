@@ -15,11 +15,12 @@ const displayController = (function(){
     
      function renderBoard(gameBoard) {
       clearTheBoard()
-          gameBoard.forEach(function(item) {
+          gameBoard.forEach(function(item, index) {
             let box = document.createElement("div")
             box.classList.add("box")
             if(item === "null"){
               box.textContent = ""
+              box.id = index
             } else {
               box.textContent = item
             }
@@ -40,5 +41,20 @@ const displayController = (function(){
 
 displayController.renderBoard(gameBoard.board)
 
+
+// game flow
+const userController = (function(){
+  let boardContainer = document.querySelector(".board-boxes")
+
+  boardContainer.addEventListener("click",function(e){
+    if(e.target.textContent === ""){
+      gameBoard.board[e.target.id] = "X"
+      displayController.renderBoard(gameBoard.board) 
+    }
+
+  })
+
+
+})()
 
 

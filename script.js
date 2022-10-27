@@ -1,6 +1,6 @@
 //game board array - module
 const gameBoard = (function () {
-  const board = []
+  const board = ["null","null","null","null","null","null","null","null","null"]
 
   
   return {
@@ -12,7 +12,7 @@ const gameBoard = (function () {
 // // controls the view
 const displayController = (function(){
     let container = document.querySelector(".board-boxes")
-
+    
      function renderBoard(gameBoard) {
       clearTheBoard()
           gameBoard.forEach(function(item) {
@@ -38,9 +38,7 @@ const displayController = (function(){
      }
 })()
 
-displayController.renderBoard(["null", "null", "null", "null", "null", "null", "null", "null", "null"])
-
-
+displayController.renderBoard(gameBoard.board)
 
 
 

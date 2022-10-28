@@ -49,11 +49,29 @@ const userController = (function(){
   boardContainer.addEventListener("click",function(e){
     if(e.target.textContent === ""){
       gameBoard.board[e.target.id] = "X"
+      computerChoice()
       displayController.renderBoard(gameBoard.board) 
+     
+    } else {
+      return
     }
 
   })
+  function computerChoice(){
+    let computer = Math.floor(Math.random() * 9)
+    if(gameBoard.board[computer] === "null") {
+      gameBoard.board[computer] = "O"
+    } else {
+      let newBoard = gameBoard.board.filter(item => item === "null")
+      let newComputerChoice = Math.floor(Math.random() * newBoard.length)
+       gameBoard.board[newComputerChoice] = "O"
+        }
+        
+    
+    }
+     
 
+  
 
 })()
 

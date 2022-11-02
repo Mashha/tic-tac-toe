@@ -42,19 +42,26 @@ displayController.renderBoard(gameBoard.board)
 const userController = (function () {
   let boardContainer = document.querySelector('.board-boxes')
 
-  boardContainer.addEventListener('click', function (e) {
+  // add icons to board
+  function addIconsToBoard(e) {
     if (e.target.textContent === '') {
       gameBoard.board[e.target.id] = 'X'
       displayController.renderBoard(gameBoard.board)
+      checkForWin(gameBoard.board, 'X')
+
       setTimeout(() => {
         computerChoice()
         displayController.renderBoard(gameBoard.board)
+        checkForWin(gameBoard.board, 'O')
       }, 1000)
     } else {
       return
     }
-  })
+  }
 
+  boardContainer.addEventListener('click', addIconsToBoard)
+
+  // computer choice
   function computerChoice() {
     let emptySpaces = []
 
@@ -65,6 +72,28 @@ const userController = (function () {
     }
 
     let computer = emptySpaces[Math.floor(Math.random() * emptySpaces.length)]
-    gameBoard.board[computer] = 'o'
+    gameBoard.board[computer] = 'O'
+  }
+
+  // winner
+
+  function checkForWin(arr, icon) {
+    if (
+      (arr[0] === icon && arr[1] === icon && arr[2] === icon) ||
+      (arr[3] === icon && arr[4] === icon && arr[5] === icon) ||
+      (arr[6] === icon && arr[7] === icon && arr[8] === icon) ||
+      (arr[0] === icon && arr[3] === icon && arr[6] === icon) ||
+      (arr[1] === icon && arr[4] === icon && arr[7] === icon) ||
+      (arr[2] === icon && arr[5] === icon && arr[8] === icon) ||
+      (arr[0] === icon && arr[4] === icon && arr[8] === icon) ||
+      (arr[2] === icon && arr[4] === icon && arr[6] === icon)
+    ) {
+      if (icon === 'X') {
+        console.log('you won')
+        boardContainer.removeEventListener('click', addIconsToBoard)
+      } else {
+        console.log('computer won')
+      }
+    }
   }
 })()

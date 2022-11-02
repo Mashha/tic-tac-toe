@@ -93,6 +93,7 @@ const userController = (function () {
         boardContainer.removeEventListener('click', addIconsToBoard)
       } else {
         console.log('computer won')
+        boardContainer.removeEventListener('click', addIconsToBoard)
       }
     }
   }

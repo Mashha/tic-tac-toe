@@ -54,6 +54,7 @@ const userController = (function () {
         displayController.renderBoard(gameBoard.board)
         checkForWin(gameBoard.board, 'O')
       }, 1000)
+      noMoreMoves()
     }
   }
 
@@ -95,6 +96,11 @@ const userController = (function () {
         return true
       }
     }
-    return false
+  }
+
+  function noMoreMoves() {
+    if (!gameBoard.board.includes(null)) {
+      console.log('draw')
+    }
   }
 })()

@@ -2,8 +2,9 @@
 const gameBoard = (function () {
   const board = [null, null, null, null, null, null, null, null, null]
 
+
   return {
-    board,
+    board
   }
 })()
 
@@ -98,9 +99,18 @@ const userController = (function () {
     }
   }
 
+  // add a draw note
   function noMoreMoves() {
     if (!gameBoard.board.includes(null)) {
       console.log('draw')
     }
   }
+
+  // button to reset
+  let resetButton = document.getElementById("resetTheGame")
+  resetButton.addEventListener("click", function(){
+   gameBoard.board = [null, null, null, null, null, null, null, null, null]
+   displayController.renderBoard(gameBoard.board)
+  })
+
 })()

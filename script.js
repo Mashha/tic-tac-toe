@@ -47,15 +47,13 @@ const userController = (function () {
     if (e.target.textContent === '') {
       gameBoard.board[e.target.id] = 'X'
       displayController.renderBoard(gameBoard.board)
-      checkForWin(gameBoard.board, 'X')
+      if (checkForWin(gameBoard.board, 'X')) return
 
       setTimeout(() => {
         computerChoice()
         displayController.renderBoard(gameBoard.board)
         checkForWin(gameBoard.board, 'O')
       }, 1000)
-    } else {
-      return
     }
   }
 
@@ -76,7 +74,6 @@ const userController = (function () {
   }
 
   // winner
-
   function checkForWin(arr, icon) {
     if (
       (arr[0] === icon && arr[1] === icon && arr[2] === icon) ||
@@ -91,10 +88,13 @@ const userController = (function () {
       if (icon === 'X') {
         console.log('you won')
         boardContainer.removeEventListener('click', addIconsToBoard)
+        return true
       } else {
         console.log('computer won')
         boardContainer.removeEventListener('click', addIconsToBoard)
+        return true
       }
     }
+    return false
   }
 })()

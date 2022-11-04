@@ -27,13 +27,25 @@ const displayController = (function () {
     })
   }
 
+  // clear the board
   function clearTheBoard() {
     container.textContent = ''
   }
 
+  // declare the winner
+  let winnerDiv = document.getElementById("winner")
+
+  function winnerMessageOnPage(winner) {
+    winnerDiv.textContent = `${winner} won!`
+  }
+
+
   return {
     container,
     renderBoard,
+    winnerDiv,
+    winnerMessageOnPage
+    
   }
 })()
 
@@ -88,11 +100,11 @@ const userController = (function () {
       (arr[2] === icon && arr[4] === icon && arr[6] === icon)
     ) {
       if (icon === 'X') {
-        console.log('you won')
+        displayController.winnerMessageOnPage("X")
         boardContainer.removeEventListener('click', addIconsToBoard)
         return true
       } else {
-        console.log('computer won')
+        displayController.winnerMessageOnPage("O")
         boardContainer.removeEventListener('click', addIconsToBoard)
         return true
       }
@@ -111,6 +123,7 @@ const userController = (function () {
   resetButton.addEventListener("click", function(){
    gameBoard.board = [null, null, null, null, null, null, null, null, null]
    displayController.renderBoard(gameBoard.board)
+   
   })
 
 })()

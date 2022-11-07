@@ -24,7 +24,7 @@ body{
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: repeat(3, minmax(0, 1fr));;
-    background-image: url("Frame1.svg");
+    background-image: url("./images/frame_board.svg");
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: cover;

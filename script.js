@@ -21,12 +21,14 @@ const displayController = (function () {
         box.id = index
       } else if (item === 'X') {
         let imageOne = document.createElement('img')
-        imageOne.src = './owl-one.png'
+        imageOne.src = 'images/owls/owl-four.png'
+        imageOne.setAttribute('alt', 'owl image')
         imageOne.classList.add('images')
         box.appendChild(imageOne)
+
       } else if (item === 'O') {
         let imageComputer = document.createElement('img')
-        imageComputer.src = './computer-owl.png'
+        imageComputer.src = './images/owls/owl-computer.png'
         imageComputer.setAttribute('alt', 'owl image')
         imageComputer.classList.add('images')
         box.appendChild(imageComputer)

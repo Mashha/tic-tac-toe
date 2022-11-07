@@ -25,7 +25,6 @@ const displayController = (function () {
         imageOne.setAttribute('alt', 'owl image')
         imageOne.classList.add('images')
         box.appendChild(imageOne)
-
       } else if (item === 'O') {
         let imageComputer = document.createElement('img')
         imageComputer.src = './images/owls/owl-computer.png'
@@ -39,6 +38,26 @@ const displayController = (function () {
   }
 
   // add images
+  let divWithImages = document.querySelector('.chooseYourOwl')
+  let owlOne = document.createElement('img')
+  owlOne.src = './images/owls/owl-one.png'
+  owlOne.classList.add('divOwlImage')
+  divWithImages.appendChild(owlOne)
+
+  let owlTwo = document.createElement('img')
+  owlTwo.src = './images/owls/owl-two.png'
+  owlTwo.classList.add('divOwlImage')
+  divWithImages.appendChild(owlTwo)
+
+  let owlThree = document.createElement('img')
+  owlThree.src = './images/owls/owl-three.png'
+  owlThree.classList.add('divOwlImage')
+  divWithImages.appendChild(owlThree)
+
+  let owlFour = document.createElement('img')
+  owlFour.src = './images/owls/owl-four.png'
+  owlFour.classList.add('divOwlImage')
+  divWithImages.appendChild(owlFour)
 
   // clear the board
   function clearTheBoard() {
@@ -48,15 +67,20 @@ const displayController = (function () {
   // declare the winner
   let winnerDiv = document.getElementById('winner')
 
-  function winnerMessageOnPage(winner) {
-    winnerDiv.textContent = `${winner} won!`
+  function userWon() {
+    winnerDiv.textContent = 'Congratulations you win!'
+  }
+
+  function computerWon() {
+    winnerDiv.textContent = 'Computer won this round'
   }
 
   return {
     container,
     renderBoard,
     winnerDiv,
-    winnerMessageOnPage,
+    userWon,
+    computerWon,
   }
 })()
 
@@ -111,11 +135,11 @@ const userController = (function () {
       (arr[2] === icon && arr[4] === icon && arr[6] === icon)
     ) {
       if (icon === 'X') {
-        displayController.winnerMessageOnPage('X')
+        displayController.userWon()
         boardContainer.removeEventListener('click', addIconsToBoard)
         return true
       } else {
-        displayController.winnerMessageOnPage('O')
+        displayController.computerWon()
         boardContainer.removeEventListener('click', addIconsToBoard)
         return true
       }
@@ -134,5 +158,6 @@ const userController = (function () {
   resetButton.addEventListener('click', function () {
     gameBoard.board = [null, null, null, null, null, null, null, null, null]
     displayController.renderBoard(gameBoard.board)
+    displayController.winnerDiv.textContent = ''
   })
 })()

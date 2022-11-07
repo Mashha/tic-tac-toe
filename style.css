@@ -30,9 +30,9 @@ body {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(3, minmax(0, 1fr));
-  background-image: url('./images/frame_board.svg');
+  background-image: url('./images/frame-board.svg');
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position: center;
   background-size: cover;
   grid-gap: 10px;
   grid-column: 2/3;
@@ -61,6 +61,7 @@ body {
 
 .divOwlImage {
   height: 70px;
+  cursor: pointer;
 }
 
 .chooseYourOwl {

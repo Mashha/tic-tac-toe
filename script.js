@@ -10,7 +10,11 @@ const gameBoard = (function () {
 // controls the view
 const displayController = (function () {
   let container = document.querySelector('.board-boxes')
+  let storedImage
 
+  function setStoredImage(source) {
+    storedImage = source
+  }
   function renderBoard(gameBoard) {
     clearTheBoard()
     gameBoard.forEach(function (item, index) {
@@ -20,11 +24,17 @@ const displayController = (function () {
         box.textContent = ''
         box.id = index
       } else if (item === 'X') {
-        let imageOne = document.createElement('img')
-        imageOne.src = 'images/owls/owl-four.png'
-        imageOne.setAttribute('alt', 'owl image')
-        imageOne.classList.add('images')
-        box.appendChild(imageOne)
+        if (storedImage === undefined) {
+          let imageForBox = document.createElement('img')
+          imageForBox.classList.add('images')
+          imageForBox.src = './images/owls/owl-four.png'
+          box.appendChild(imageForBox)
+        } else {
+          let imageForBox = document.createElement('img')
+          imageForBox.classList.add('images')
+          imageForBox.src = storedImage
+          box.appendChild(imageForBox)
+        }
       } else if (item === 'O') {
         let imageComputer = document.createElement('img')
         imageComputer.src = './images/owls/owl-computer.png'
@@ -59,6 +69,15 @@ const displayController = (function () {
   owlFour.classList.add('divOwlImage')
   divWithImages.appendChild(owlFour)
 
+  let pickAnImage = (() => {
+    let chooseAnImage = document.querySelectorAll('.divOwlImage')
+    chooseAnImage.forEach(function (image) {
+      image.addEventListener('click', function (e) {
+        setStoredImage(e.target.src)
+      })
+    })
+  })()
+
   // clear the board
   function clearTheBoard() {
     container.textContent = ''
@@ -81,6 +100,7 @@ const displayController = (function () {
     winnerDiv,
     userWon,
     computerWon,
+    pickAnImage,
   }
 })()
 

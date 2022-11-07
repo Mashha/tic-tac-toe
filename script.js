@@ -2,13 +2,12 @@
 const gameBoard = (function () {
   const board = [null, null, null, null, null, null, null, null, null]
 
-
   return {
-    board
+    board,
   }
 })()
 
-// // controls the view
+// controls the view
 const displayController = (function () {
   let container = document.querySelector('.board-boxes')
 
@@ -20,12 +19,24 @@ const displayController = (function () {
       if (item === null) {
         box.textContent = ''
         box.id = index
-      } else {
-        box.textContent = item
+      } else if (item === 'X') {
+        let imageOne = document.createElement('img')
+        imageOne.src = './owl-one.png'
+        imageOne.classList.add('images')
+        box.appendChild(imageOne)
+      } else if (item === 'O') {
+        let imageComputer = document.createElement('img')
+        imageComputer.src = './computer-owl.png'
+        imageComputer.setAttribute('alt', 'owl image')
+        imageComputer.classList.add('images')
+        box.appendChild(imageComputer)
       }
+
       container.appendChild(box)
     })
   }
+
+  // add images
 
   // clear the board
   function clearTheBoard() {
@@ -33,19 +44,17 @@ const displayController = (function () {
   }
 
   // declare the winner
-  let winnerDiv = document.getElementById("winner")
+  let winnerDiv = document.getElementById('winner')
 
   function winnerMessageOnPage(winner) {
     winnerDiv.textContent = `${winner} won!`
   }
 
-
   return {
     container,
     renderBoard,
     winnerDiv,
-    winnerMessageOnPage
-    
+    winnerMessageOnPage,
   }
 })()
 
@@ -100,11 +109,11 @@ const userController = (function () {
       (arr[2] === icon && arr[4] === icon && arr[6] === icon)
     ) {
       if (icon === 'X') {
-        displayController.winnerMessageOnPage("X")
+        displayController.winnerMessageOnPage('X')
         boardContainer.removeEventListener('click', addIconsToBoard)
         return true
       } else {
-        displayController.winnerMessageOnPage("O")
+        displayController.winnerMessageOnPage('O')
         boardContainer.removeEventListener('click', addIconsToBoard)
         return true
       }
@@ -119,11 +128,9 @@ const userController = (function () {
   }
 
   // button to reset
-  let resetButton = document.getElementById("resetTheGame")
-  resetButton.addEventListener("click", function(){
-   gameBoard.board = [null, null, null, null, null, null, null, null, null]
-   displayController.renderBoard(gameBoard.board)
-   
+  let resetButton = document.getElementById('resetTheGame')
+  resetButton.addEventListener('click', function () {
+    gameBoard.board = [null, null, null, null, null, null, null, null, null]
+    displayController.renderBoard(gameBoard.board)
   })
-
 })()

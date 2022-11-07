@@ -1,22 +1,42 @@
 body{
     height: 100vh;
     width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 .container {
     height: 100vh;
     display: grid;
-    place-content: center;
+    justify-items: center;
+    grid-gap: 20px;
+}
+
+.title img {
+    width: 450px;
+    padding: 10px;
 }
 
 .board-boxes {
-    width: 300px;
-    height: 300px;
+    width: 420px;
+    height: 400px;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));;
+    background-image: url("Frame1.svg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    grid-gap: 10px;
+    
 }
 
 .box {
-    border: 1px solid brown;
+    display: grid;
+    place-items: center;
+}
+
+.images {
+   width: 50px;
 }

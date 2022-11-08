@@ -96,11 +96,16 @@ const displayController = (function () {
     winnerDiv.textContent = 'Computer won this round'
   }
 
+  function draw() {
+    winnerDiv.textContent = "It's a draw, play again"
+  }
+
   return {
     container,
     renderBoard,
     winnerDiv,
     userWon,
+    draw,
     computerWon,
     pickAnImage,
   }
@@ -116,7 +121,7 @@ const userController = (function () {
   function addIconsToBoard(e) {
     if (e.target.textContent === '') {
       gameBoard.board[e.target.id] = 'X'
-     
+
       displayController.renderBoard(gameBoard.board)
       if (checkForWin(gameBoard.board, 'X')) return
 
@@ -172,7 +177,7 @@ const userController = (function () {
   // add a draw note
   function noMoreMoves() {
     if (!gameBoard.board.includes(null)) {
-      console.log('draw')
+      displayController.draw()
     }
   }
 

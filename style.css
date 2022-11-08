@@ -30,7 +30,6 @@ body {
 }
 
 .board-boxes {
-  width: 420px;
   height: 400px;
   box-sizing: border-box;
   display: grid;
@@ -38,21 +37,20 @@ body {
   grid-template-rows: repeat(3, minmax(0, 1fr));
   background-image: url('./images/frame-board.svg');
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-size: 100% 100%;
   grid-gap: 10px;
 }
 
 .board-box-outer {
+  width: 420px;
   grid-column: 2/3;
-  display: grid;
-  place-items: center;
 }
 
 .box {
   display: grid;
   place-items: center;
   cursor: pointer;
+  padding-right: 10px;
 }
 
 .images {
@@ -180,6 +178,30 @@ footer {
 
   #winner {
     grid-row: 4;
+  }
+}
+
+@media (max-width: 444px) {
+  .board-box-outer {
+    width: 100%;
+  }
+  .title {
+    width: 100%;
+  }
+  .title img {
+    width: 100%;
+  }
+  #winner {
+    font-size: 20px;
+  }
+  .gameEdit {
+    width: 100%;
+  }
+  .container {
+    grid-gap: 0;
+  }
+  .divOwlImage {
+    height: 60px;
   }
 }
 

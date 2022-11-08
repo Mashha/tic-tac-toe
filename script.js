@@ -78,6 +78,7 @@ const displayController = (function () {
     function getStoredImage(e) {
       setStoredImage(e.target.src)
     }
+    
   })()
 
   // clear the board
@@ -116,15 +117,16 @@ displayController.renderBoard(gameBoard.board)
 // game flow
 const userController = (function () {
   let boardContainer = document.querySelector('.board-boxes')
+  let isGamePlaying = true;
 
   // add icons to board
   function addIconsToBoard(e) {
     if (e.target.textContent === '') {
       gameBoard.board[e.target.id] = 'X'
-
+      disableImages()
       displayController.renderBoard(gameBoard.board)
       if (checkForWin(gameBoard.board, 'X')) return
-
+      
       setTimeout(() => {
         computerChoice()
         displayController.renderBoard(gameBoard.board)
@@ -132,9 +134,20 @@ const userController = (function () {
       }, 1000)
       noMoreMoves()
     }
+    return true
   }
 
   boardContainer.addEventListener('click', addIconsToBoard)
+
+  function disableImages() {
+      let imagesDisable = document.querySelectorAll(".divOwlImage")
+      imagesDisable.forEach(function(image){
+        if(isGamePlaying) {
+        image.classList.add("disable-btn-click")
+    } else {
+      image.classList.remove("disable-btn-click")
+    }
+  })}
 
   // computer choice
   function computerChoice() {
@@ -188,5 +201,9 @@ const userController = (function () {
     displayController.renderBoard(gameBoard.board)
     displayController.winnerDiv.textContent = ''
     boardContainer.addEventListener('click', addIconsToBoard)
+    isGamePlaying = false
+    disableImages()
   })
+
+  
 })()

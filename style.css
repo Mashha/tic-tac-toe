@@ -182,3 +182,7 @@ footer {
     grid-row: 4;
   }
 }
+
+.disable-btn-click {
+  pointer-events: none;
+}

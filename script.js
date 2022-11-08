@@ -15,6 +15,7 @@ const displayController = (function () {
   function setStoredImage(source) {
     storedImage = source
   }
+
   function renderBoard(gameBoard) {
     clearTheBoard()
     gameBoard.forEach(function (item, index) {
@@ -72,10 +73,11 @@ const displayController = (function () {
   let pickAnImage = (() => {
     let chooseAnImage = document.querySelectorAll('.divOwlImage')
     chooseAnImage.forEach(function (image) {
-      image.addEventListener('click', function (e) {
-        setStoredImage(e.target.src)
-      })
+      image.addEventListener('click', getStoredImage)
     })
+    function getStoredImage(e) {
+      setStoredImage(e.target.src)
+    }
   })()
 
   // clear the board
@@ -114,6 +116,7 @@ const userController = (function () {
   function addIconsToBoard(e) {
     if (e.target.textContent === '') {
       gameBoard.board[e.target.id] = 'X'
+     
       displayController.renderBoard(gameBoard.board)
       if (checkForWin(gameBoard.board, 'X')) return
 
@@ -179,5 +182,6 @@ const userController = (function () {
     gameBoard.board = [null, null, null, null, null, null, null, null, null]
     displayController.renderBoard(gameBoard.board)
     displayController.winnerDiv.textContent = ''
+    boardContainer.addEventListener('click', addIconsToBoard)
   })
 })()

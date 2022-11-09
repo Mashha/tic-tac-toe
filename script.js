@@ -138,6 +138,7 @@ const userController = (function () {
 
   boardContainer.addEventListener('click', addIconsToBoard)
 
+  // duisable images to be clicked after the game is already playing
   function disableImages() {
     let imagesDisable = document.querySelectorAll('.divOwlImage')
     imagesDisable.forEach(function (image) {

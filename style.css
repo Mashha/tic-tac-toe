@@ -137,6 +137,8 @@ footer {
   transform: rotate(360deg);
 }
 
+/* media queries */
+
 @media (max-width: 944px) {
   .container {
     grid-template-columns: 1fr 1fr;
@@ -204,6 +206,8 @@ footer {
     height: 60px;
   }
 }
+
+/* to disable images in js */
 
 .disable-btn-click {
   pointer-events: none;

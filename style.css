@@ -43,7 +43,12 @@ body {
 
 .board-box-outer {
   width: 420px;
+}
+
+.div-center {
   grid-column: 2/3;
+  display: grid;
+  place-items: center;
 }
 
 .box {
@@ -170,9 +175,10 @@ footer {
     grid-row: 1;
   }
 
-  .board-box-outer {
+  .div-center {
     grid-column: 1/2;
     grid-row: 2;
+    width: 100%;
   }
   .chooseYourOwl {
     margin-bottom: 20px;

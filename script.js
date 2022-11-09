@@ -120,9 +120,9 @@ const userController = (function () {
 
   // add icons to board
   function addIconsToBoard(e) {
-    if (e.target.textContent === '') {
-      gameBoard.board[e.target.id] = 'X'
+    if (!e.target.classList.contains("images")) {
       disableImages()
+      gameBoard.board[e.target.id] = 'X'
       displayController.renderBoard(gameBoard.board)
       if (checkForWin(gameBoard.board, 'X')) return
 

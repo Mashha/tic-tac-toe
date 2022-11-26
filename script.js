@@ -2,8 +2,13 @@
 const gameBoard = (function () {
   const board = [null, null, null, null, null, null, null, null, null]
 
+  const humanPlayer = "X"
+  const computerPlayer = "O"
+
   return {
     board,
+    humanPlayer,
+    computerPlayer
   }
 })()
 
@@ -77,6 +82,7 @@ const displayController = (function () {
     })
     function getStoredImage(e) {
       setStoredImage(e.target.src)
+
     }
   })()
 
@@ -138,7 +144,7 @@ const userController = (function () {
 
   boardContainer.addEventListener('click', addIconsToBoard)
 
-  // duisable images to be clicked after the game is already playing
+  // disable images to be clicked after the game is already playing
   function disableImages() {
     let imagesDisable = document.querySelectorAll('.divOwlImage')
     imagesDisable.forEach(function (image) {
@@ -151,15 +157,20 @@ const userController = (function () {
   }
 
   // computer choice
-  function computerChoice() {
-    let emptySpaces = []
 
+  function emptySpacesAvailable(emptySpaces) {
     for (let i = 0; i < gameBoard.board.length; i++) {
       if (gameBoard.board[i] === null) {
         emptySpaces.push(i)
       }
     }
+  }
 
+  function computerChoice() {
+    let emptySpaces = []
+    
+    emptySpacesAvailable(emptySpaces)
+    
     let computer = emptySpaces[Math.floor(Math.random() * emptySpaces.length)]
     gameBoard.board[computer] = 'O'
   }
@@ -205,4 +216,30 @@ const userController = (function () {
     isGamePlaying = false
     disableImages()
   })
+
+
+  function bestSpot(){
+    return minimax(emptySpaces, "O").index
+  }
+
+  function minimax(emptySpaces, icon) {
+    let availableSpots = emptySpacesAvailable(emptySpaces)
+
+    if(checkForWin(emptySpaces, icon)){
+      return {score: -10}
+    } else if(checkForWin(emptySpaces, "O")) {
+      return {score: 10}
+    } else if( availableSpots.length === 0) {
+      return {score: 0}
+    }
+
+    let moves = []
+
+    for(let i = 0; i < availableSpots.length; i++) {
+      let move = {}
+      move.index = emptySpaces[availableSpots[i]]
+      emptySpaces[availableSpots[i]] = player
+
+    }
+  }
 })()
